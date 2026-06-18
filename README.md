@@ -1,73 +1,146 @@
-# React + TypeScript + Vite
+# efood — Plataforma de Delivery Gastronômico
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação web de delivery de comida desenvolvida como projeto do curso EBAC. Permite explorar restaurantes, visualizar cardápios, adicionar pratos ao carrinho e simular um checkout completo com entrega e pagamento.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Funcionalidades
 
-## React Compiler
+- Listagem de restaurantes consumida via API REST
+- Página de perfil de cada restaurante com cardápio completo
+- Modal de detalhes do prato
+- Carrinho lateral com gerenciamento de itens
+- Fluxo de checkout em 3 etapas: entrega → pagamento → confirmação
+- Avaliação por estrelas em cada restaurante
+- Indicação de restaurantes em destaque
+- Design responsivo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Tecnologias
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Tecnologia | Versão | Uso |
+| --- | --- | --- |
+| React | 19 | Interface e componentização |
+| TypeScript | 6 | Tipagem estática |
+| Vite | 8 | Build e dev server |
+| Tailwind CSS | 4 | Estilização utilitária |
+| React Router | 7 | Navegação entre páginas |
+| Lucide React | — | Ícones |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Estrutura do Projeto
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```text
+src/
+├── components/
+│   ├── cart/
+│   │   ├── Cart.tsx           # Sidebar do carrinho
+│   │   └── CartItem.tsx       # Item individual do carrinho
+│   ├── checkout/
+│   │   ├── Checkout.tsx       # Orquestrador do fluxo de checkout
+│   │   ├── DeliveryForm.tsx   # Etapa de endereço de entrega
+│   │   ├── PaymentForm.tsx    # Etapa de pagamento
+│   │   └── Confirmation.tsx   # Tela de confirmação do pedido
+│   ├── home/
+│   │   └── RestaurantCard.tsx # Card de restaurante na listagem
+│   ├── layout/
+│   │   ├── Header.tsx         # Header (variantes: home e perfil)
+│   │   └── Footer.tsx         # Rodapé
+│   ├── restaurant/
+│   │   ├── RestaurantHero.tsx # Banner do perfil do restaurante
+│   │   ├── DishCard.tsx       # Card de prato no cardápio
+│   │   └── DishModal.tsx      # Modal de detalhes do prato
+│   └── ui/
+│       ├── Button.tsx         # Botão reutilizável (variantes: primary, secondary, outline)
+│       ├── Container.tsx      # Wrapper de largura máxima centralizado
+│       ├── Logo.tsx           # Logo efood com ícone
+│       ├── StarRating.tsx     # Componente de avaliação por estrelas
+│       └── Tag.tsx            # Tag de categoria
+├── context/
+│   ├── cartState.ts           # Definição do contexto e interface
+│   └── CartContext.tsx        # Provider do carrinho
+├── hooks/
+│   ├── useCart.ts             # Acesso ao contexto do carrinho
+│   ├── useForm.ts             # Gerenciamento de formulários controlados
+│   ├── useRestaurant.ts       # Fetch de um restaurante por ID
+│   └── useRestaurants.ts      # Fetch da listagem de restaurantes
+├── pages/
+│   ├── Home.tsx               # Página inicial — listagem
+│   └── RestaurantProfile.tsx  # Página de perfil do restaurante
+├── services/
+│   └── api.ts                 # Funções de fetch e mapeamento da API
+├── types/
+│   └── index.ts               # Interfaces TypeScript globais
+└── data/
+    └── restaurants.ts         # Dados locais de fallback (legado)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## API
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Os dados são consumidos da API pública do curso EBAC:
+
+```text
+Base URL: https://api-ebac.vercel.app/api/efood
 ```
+
+| Endpoint | Método | Descrição |
+| --- | --- | --- |
+| `/restaurantes` | GET | Lista todos os restaurantes |
+| `/restaurantes/:id` | GET | Retorna um restaurante pelo ID |
+
+A camada de serviço em `src/services/api.ts` realiza o mapeamento dos campos da API (em português: `titulo`, `cardapio`, `porcao`, etc.) para as interfaces internas do projeto.
+
+---
+
+## Como Rodar
+
+### Pré-requisitos
+
+- Node.js 18+
+- npm
+
+### Instalação
+
+```bash
+npm install
+```
+
+### Desenvolvimento
+
+```bash
+npm run dev
+```
+
+Acesse `http://localhost:5173`
+
+### Build
+
+```bash
+npm run build
+```
+
+### Preview do Build
+
+```bash
+npm run preview
+```
+
+---
+
+## Fluxo do Carrinho
+
+O estado global do carrinho é gerenciado via **React Context** (`CartContext`) e exposto pelo hook `useCart`. O fluxo de checkout segue as etapas:
+
+```text
+Carrinho → Dados de Entrega → Pagamento → Confirmação
+```
+
+Cada etapa é controlada pelo campo `step` no contexto, e a transição entre elas é feita pelo `setStep`.
+
+---
+
+## Projeto desenvolvido para o curso EBAC — Engenheiro Front-end
