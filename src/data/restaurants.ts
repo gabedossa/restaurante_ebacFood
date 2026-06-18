@@ -92,7 +92,7 @@ export const restaurants: Restaurant[] = [
           'Seleção especial com niguiris, uramakis e temakis do chefe. Inclui molho shoyu e gengibre.',
         price: 89.9,
         photo:
-          'https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=400&h=300&fit=crop',
+          'https://images.unsplash.com/photo-1553621042-f6e147245754?w=400&h=300&fit=crop',
         serve: 'Serve 2 pessoas',
       },
       {
