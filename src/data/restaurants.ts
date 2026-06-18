@@ -3,193 +3,277 @@ import type { Restaurant } from '../types'
 export const restaurants: Restaurant[] = [
   {
     id: 1,
-    name: 'La Dolce Vita Trattoria',
+    name: 'Bella Tavola Italiana',
     description:
-      'Autêntica culinária italiana no coração da cidade. Massas artesanais, pizzas napolitanas e sobremesas irresistíveis.',
-    logo: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=80&h=80&fit=crop',
-    coverImage:
-      'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=400&fit=crop',
-    rating: 4.8,
-    tags: [{ id: 1, name: 'Pizza' }, { id: 2, name: 'Italiana' }],
+      'A paixão dos nossos talentosos chefs pela cozinha italiana é evidente em cada prato, desde massas caseiras e risotos cremosos até suculentos frutos do mar e carnes tenras. Nosso menu é complementado por uma excelente carta de vinhos, cuidadosamente selecionados para harmonizar com a riqueza dos sabores italianos.',
+    logo: 'https://api-ebac.vercel.app/efood/bella_tavola_italiana//capa.jpeg',
+    coverImage: 'https://api-ebac.vercel.app/efood/bella_tavola_italiana//capa.jpeg',
+    rating: 4.7,
+    featured: true,
+    tags: [{ id: 1, name: 'Italiana' }],
     menu: [
       {
         id: 1,
-        name: 'Pizza Margherita',
+        name: 'Ravioli al Tartufo Nero',
         description:
-          'A clássica pizza italiana com molho de tomate San Marzano, mozzarella de búfala e manjericão fresco.',
-        price: 49.9,
-        photo:
-          'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&h=300&fit=crop',
-        serve: 'Serve 2 pessoas',
+          'O Ravioli al Tartufo Nero é um requintado prato de massa artesanal, que celebra os sabores ricos e terrosos da trufa negra italiana. Cada ravióli é cuidadosamente recheado com uma mistura saborosa de ricota fresca, parmesão e trufas negras raladas, proporcionando uma combinação de texturas suaves e aromas irresistíveis.',
+        price: 69.9,
+        photo: 'https://api-ebac.vercel.app/efood/bella_tavola_italiana//1.webp',
+        serve: '1 a 2 pessoas',
       },
       {
         id: 2,
-        name: 'Fettuccine Alfredo',
+        name: 'Spaghetti alla Carbonara',
         description:
-          'Massa artesanal ao molho cremoso de queijo parmesão, manteiga e noz-moscada.',
-        price: 44.9,
-        photo:
-          'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=300&fit=crop',
-        serve: 'Serve 1 pessoa',
+          'O Spaghetti alla Carbonara é um clássico prato italiano, feito com massa spaghetti al dente, coberto com um molho rico e cremoso à base de ovos, queijo pecorino romano, pancetta e pimenta-do-reino. Um prato saboroso e reconfortante que leva você diretamente para a Itália.',
+        price: 56.9,
+        photo: 'https://api-ebac.vercel.app/efood/bella_tavola_italiana//2.jpg',
+        serve: '1 a 2 pessoas',
       },
       {
         id: 3,
-        name: 'Risotto ai Funghi',
+        name: 'Risotto ai Funghi Porcini',
         description:
-          'Risoto cremoso com mix de cogumelos frescos, vinho branco e queijo parmesão.',
-        price: 54.9,
-        photo:
-          'https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=400&h=300&fit=crop',
-        serve: 'Serve 1 pessoa',
+          'O Risotto ai Funghi Porcini é uma iguaria italiana feita com arroz Arborio de alta qualidade e cogumelos porcini secos, que são reidratados para liberar seu sabor intenso e terroso. O arroz é cozido lentamente em um caldo de legumes, com vinho branco e queijo parmesão, resultando em um risoto cremoso e delicioso.',
+        price: 74.9,
+        photo: 'https://api-ebac.vercel.app/efood/bella_tavola_italiana//3.jpg',
+        serve: '1 a 2 pessoas',
       },
       {
         id: 4,
-        name: 'Lasagna Bolognese',
+        name: 'Ossobuco alla Milanese',
         description:
-          'Lasanha tradicional com ragù de carne, molho béchamel e queijos selecionados.',
-        price: 52.9,
-        photo:
-          'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=400&h=300&fit=crop',
-        serve: 'Serve 2 pessoas',
+          'O Ossobuco alla Milanese é um tradicional prato italiano, originário de Milão, que consiste em um suculento pedaço de vitela cozido lentamente em um molho à base de tomate, vinho branco e legumes. O prato é acompanhado por uma porção de polenta cremosa ou risoto alla Milanese, feito com açafrão.',
+        price: 89.9,
+        photo: 'https://api-ebac.vercel.app/efood/bella_tavola_italiana//4.jpg',
+        serve: '1 a 2 pessoas',
       },
       {
         id: 5,
-        name: 'Tiramisu',
+        name: 'Melanzane alla Parmigiana',
         description:
-          'Sobremesa clássica italiana com camadas de biscoito champagne, café espresso e creme de mascarpone.',
-        price: 22.9,
-        photo:
-          'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400&h=300&fit=crop',
-        serve: 'Serve 1 pessoa',
+          'Melanzane alla Parmigiana é um delicioso prato à base de berinjelas, em camadas com molho de tomate caseiro, queijo muçarela e parmesão, assado até ficar dourado e borbulhante. Uma opção saborosa e reconfortante, perfeita para os amantes de legumes e queijo.',
+        price: 62.9,
+        photo: 'https://api-ebac.vercel.app/efood/bella_tavola_italiana//5.jpg',
+        serve: '1 a 2 pessoas',
       },
       {
         id: 6,
-        name: 'Bruschetta al Pomodoro',
+        name: 'Frutti di Mare Linguine',
         description:
-          'Torradas de pão ciabatta com tomate fresco, alho, azeite extra virgem e manjericão.',
-        price: 18.9,
-        photo:
-          'https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=400&h=300&fit=crop',
-        serve: 'Serve 2 pessoas',
+          'O Frutti di Mare Linguine é uma verdadeira celebração dos sabores do mar, apresentando uma generosa mistura de frutos do mar frescos, como camarões, lulas, mariscos e vieiras, combinados com massa linguine al dente e um saboroso molho de tomate e vinho branco.',
+        price: 84.9,
+        photo: 'https://api-ebac.vercel.app/efood/bella_tavola_italiana//6.jpg',
+        serve: '1 a 2 pessoas',
+      },
+      {
+        id: 7,
+        name: 'Insalata Caprese',
+        description:
+          'A Insalata Caprese é uma refrescante e deliciosa salada italiana, feita com tomates maduros e suculentos, fatias frescas de mozzarella di bufala, folhas de manjericão e um fio de azeite extra virgem de oliva. Uma opção leve e saborosa, perfeita como entrada ou acompanhamento.',
+        price: 49.9,
+        photo: 'https://api-ebac.vercel.app/efood/bella_tavola_italiana//7.jpg',
+        serve: '1 a 2 pessoas',
       },
     ],
   },
   {
     id: 2,
-    name: 'Sakura Japanese Cuisine',
+    name: 'Casa das Delícias Árabes',
     description:
-      'Experiência gastronômica japonesa autêntica. Sushis, sashimis e pratos quentes preparados com ingredientes selecionados.',
-    logo: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=80&h=80&fit=crop',
-    coverImage:
-      'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=1200&h=400&fit=crop',
-    rating: 4.9,
-    tags: [{ id: 3, name: 'Japonesa' }, { id: 4, name: 'Sushi' }],
+      'A Casa das Delícias Árabes é um acolhedor e autêntico restaurante árabe, localizado no coração da cidade, que proporciona uma verdadeira experiência culinária do Oriente Médio. O ambiente é decorado com elementos tradicionais e exóticos, criando uma atmosfera convidativa e confortável.',
+    logo: 'https://api-ebac.vercel.app/efood/casa_delicias_arabes//capa.jpeg',
+    coverImage: 'https://api-ebac.vercel.app/efood/casa_delicias_arabes//capa.jpeg',
+    rating: 4.8,
+    featured: false,
+    tags: [{ id: 2, name: 'Árabe' }],
     menu: [
       {
-        id: 7,
-        name: 'Combinado Sakura (20 peças)',
-        description:
-          'Seleção especial com niguiris, uramakis e temakis do chefe. Inclui molho shoyu e gengibre.',
-        price: 89.9,
-        photo:
-          'https://images.unsplash.com/photo-1553621042-f6e147245754?w=400&h=300&fit=crop',
-        serve: 'Serve 2 pessoas',
-      },
-      {
         id: 8,
-        name: 'Ramen Tonkotsu',
+        name: 'Mezze Platter',
         description:
-          'Caldo rico de osso de porco com macarrão artesanal, ovo marinado, chashu e nori.',
-        price: 45.9,
-        photo:
-          'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop',
-        serve: 'Serve 1 pessoa',
+          'O Mezze Platter é uma seleção de aperitivos tradicionais árabes, incluindo homus, babaganush, tabule, falafel, azeitonas e pão pita fresco. Uma combinação deliciosa de sabores e texturas que proporciona uma experiência gastronômica única e diversificada.',
+        price: 49.9,
+        photo: 'https://api-ebac.vercel.app/efood/casa_delicias_arabes//1.jpg',
+        serve: '2 a 4 pessoas',
       },
       {
         id: 9,
-        name: 'Tempura de Camarão',
+        name: 'Kebab de Cordeiro',
         description:
-          'Camarões empanados em massa leve e crocante servidos com molho tentsuyu.',
-        price: 52.9,
-        photo:
-          'https://images.unsplash.com/photo-1519984388953-d2406bc725e1?w=400&h=300&fit=crop',
-        serve: 'Serve 1 pessoa',
+          'O Kebab de Cordeiro é feito com pedaços de cordeiro marinados em especiarias e ervas, grelhados à perfeição e servidos com arroz basmati perfumado, salada e molho de iogurte. Uma opção saborosa e suculenta para quem aprecia a autêntica cozinha árabe.',
+        price: 54.9,
+        photo: 'https://api-ebac.vercel.app/efood/casa_delicias_arabes//2.jpg',
+        serve: '1 a 2 pessoas',
+      },
+      {
+        id: 10,
+        name: 'Shawarma de Frango',
+        description:
+          'O Shawarma de Frango é preparado com finas fatias de frango marinadas em uma mistura de especiarias e grelhadas lentamente. Servido com pão pita, salada e molho tahine, este prato é uma opção saborosa e satisfatória para quem deseja saborear a autêntica comida de rua árabe.',
+        price: 45.9,
+        photo: 'https://api-ebac.vercel.app/efood/casa_delicias_arabes//3.webp',
+        serve: '1 pessoa',
       },
     ],
   },
   {
     id: 3,
-    name: 'Le Petit Bistro',
+    name: 'Sakura Sushi House',
     description:
-      'Cozinha francesa clássica em ambiente acolhedor. Croissants, crêpes e pratos tradicionais da gastronomia francesa.',
-    logo: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=80&h=80&fit=crop',
-    coverImage:
-      'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=400&fit=crop',
-    rating: 4.7,
-    tags: [{ id: 5, name: 'Francesa' }, { id: 6, name: 'Bistrô' }],
+      'A Sakura Sushi House é um sofisticado e autêntico restaurante japonês que oferece uma experiência culinária imersiva, transportando os visitantes diretamente para a Terra do Sol Nascente. O ambiente elegante é complementado por um belo jardim japonês, criando uma atmosfera tranquila e serena.',
+    logo: 'https://api-ebac.vercel.app/efood/sakura_sushi_house//capa.jpeg',
+    coverImage: 'https://api-ebac.vercel.app/efood/sakura_sushi_house//capa.jpeg',
+    rating: 4.9,
+    featured: false,
+    tags: [{ id: 3, name: 'Japonesa' }, { id: 4, name: 'Sushi' }],
     menu: [
       {
-        id: 10,
-        name: 'Croque Monsieur',
-        description:
-          'Sanduíche quente clássico francês com presunto, queijo gruyère e molho béchamel.',
-        price: 32.9,
-        photo:
-          'https://images.unsplash.com/photo-1528736235302-52922df5c122?w=400&h=300&fit=crop',
-        serve: 'Serve 1 pessoa',
-      },
-      {
         id: 11,
-        name: 'Bouillabaisse',
+        name: 'Sushi e Sashimi Combinado',
         description:
-          'Tradicional sopa de peixe provençal com frutos do mar, açafrão e rouille.',
-        price: 67.9,
-        photo:
-          'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=300&fit=crop',
-        serve: 'Serve 2 pessoas',
+          'O Sushi e Sashimi Combinado é uma seleção de peças cuidadosamente elaboradas por nossos sushimen, incluindo atum, salmão, peixe branco, camarão e outros frutos do mar frescos. Acompanha uma porção de wasabi, gengibre em conserva e molho shoyu, para realçar os sabores naturais dos ingredientes.',
+        price: 89.9,
+        photo: 'https://api-ebac.vercel.app/efood/sakura_sushi_house//1.jpg',
+        serve: '1 a 2 pessoas',
       },
       {
         id: 12,
-        name: 'Crème Brûlée',
+        name: 'Tempura de Legumes e Camarão',
         description:
-          'Creme de baunilha com casquinha de açúcar caramelizado na hora.',
-        price: 24.9,
-        photo:
-          'https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?w=400&h=300&fit=crop',
-        serve: 'Serve 1 pessoa',
+          'O Tempura de Legumes e Camarão é uma opção deliciosa e crocante, composta por uma variedade de legumes e camarões frescos empanados em uma massa leve e frita até a perfeição. Acompanha um molho tentsuyu, à base de dashi, shoyu e mirin, para dar um toque especial ao prato.',
+        price: 79.9,
+        photo: 'https://api-ebac.vercel.app/efood/sakura_sushi_house//2.jpg',
+        serve: '1 a 2 pessoas',
+      },
+      {
+        id: 13,
+        name: 'Teishoku de Tonkatsu',
+        description:
+          'O Teishoku de Tonkatsu é um prato tradicional japonês composto por uma fatia de lombo de porco empanado e frito, servido com arroz japonês, misoshiru (sopa de pasta de soja) e tsukemono (legumes em conserva). O molho tonkatsu, à base de frutas e legumes, adiciona um sabor agridoce irresistível.',
+        price: 69.9,
+        photo: 'https://api-ebac.vercel.app/efood/sakura_sushi_house//3.jpg',
+        serve: '1 pessoa',
       },
     ],
   },
   {
     id: 4,
-    name: 'Churrascaria Gaúcha',
+    name: 'Cantinho Lusitano',
     description:
-      'A melhor carne do sul do Brasil. Cortes nobres na brasa, acompanhamentos tradicionais e muito chimarrão.',
-    logo: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=80&h=80&fit=crop',
-    coverImage:
-      'https://images.unsplash.com/photo-1544025162-d76694265947?w=1200&h=400&fit=crop',
-    rating: 4.6,
-    tags: [{ id: 7, name: 'Churrasco' }, { id: 8, name: 'Brasileira' }],
+      'O Cantinho Lusitano é um charmoso e tradicional restaurante português, que celebra a rica herança culinária de Portugal. Neste aconchegante espaço, os visitantes podem desfrutar dos autênticos sabores portugueses, preparados com ingredientes frescos e de alta qualidade, respeitando as receitas clássicas.',
+    logo: 'https://api-ebac.vercel.app/efood/cantinho_lusitano//capa.jpeg',
+    coverImage: 'https://api-ebac.vercel.app/efood/cantinho_lusitano//capa.jpeg',
+    rating: 4.8,
+    featured: false,
+    tags: [{ id: 5, name: 'Portuguesa' }],
     menu: [
       {
-        id: 13,
-        name: 'Picanha na Brasa',
+        id: 14,
+        name: 'Bacalhau à Gomes de Sá',
         description:
-          'Corte nobre de picanha grelhada na brasa com sal grosso, acompanha farofa e vinagrete.',
-        price: 89.9,
-        photo:
-          'https://images.unsplash.com/photo-1558030006-450675393462?w=400&h=300&fit=crop',
-        serve: 'Serve 2 pessoas',
+          'O Bacalhau à Gomes de Sá é um prato tradicional português, que consiste em lascas de bacalhau cozido, batatas, cebola, alho, azeite e azeitonas pretas. Finalizado com salsa picada e ovos cozidos, este prato é um clássico da culinária portuguesa, que agrada a todos os paladares.',
+        price: 74.9,
+        photo: 'https://api-ebac.vercel.app/efood/cantinho_lusitano//1.jpeg',
+        serve: '1 a 2 pessoas',
       },
       {
-        id: 14,
-        name: 'Costela Gaúcha',
+        id: 15,
+        name: 'Arroz de Pato',
         description:
-          'Costela bovina assada lentamente por 12 horas com tempero especial da casa.',
-        price: 75.9,
-        photo:
-          'https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop',
-        serve: 'Serve 2 pessoas',
+          'O Arroz de Pato é um delicioso prato português, feito com arroz, carne de pato desfiada, chouriço e cenoura. Cozido lentamente no forno para absorver todos os sabores e aromas, o resultado é um prato saboroso e reconfortante que conquista os corações dos apaixonados pela gastronomia lusitana.',
+        price: 64.9,
+        photo: 'https://api-ebac.vercel.app/efood/cantinho_lusitano//2.jpg',
+        serve: '1 a 2 pessoas',
+      },
+      {
+        id: 16,
+        name: 'Alheira de Mirandela',
+        description:
+          'A Alheira de Mirandela é um emblemático prato português, que consiste em uma deliciosa alheira grelhada, acompanhada de batatas fritas, arroz e uma salada fresca. A alheira é uma saborosa e suculenta mistura de carnes e pão, com um toque de alho e especiarias, que agrada a todos os gostos.',
+        price: 54.9,
+        photo: 'https://api-ebac.vercel.app/efood/cantinho_lusitano//3.png',
+        serve: '1 pessoa',
+      },
+    ],
+  },
+  {
+    id: 5,
+    name: 'Piazza del Forno',
+    description:
+      'A Piazza del Forno é uma pizzaria acolhedora e autêntica que se orgulha de suas raízes italianas. Aqui, você encontrará pizzas artesanais preparadas com ingredientes frescos e assadas em forno a lenha, proporcionando sabores inigualáveis e uma crosta crocante e deliciosa.',
+    logo: 'https://api-ebac.vercel.app/efood/piazza//capa.png',
+    coverImage: 'https://api-ebac.vercel.app/efood/piazza//capa.png',
+    rating: 4.7,
+    featured: false,
+    tags: [{ id: 6, name: 'Pizza' }, { id: 7, name: 'Italiana' }],
+    menu: [
+      {
+        id: 17,
+        name: 'Pizza Margherita',
+        description:
+          'A Pizza Margherita é um clássico italiano, preparada com molho de tomate caseiro, muçarela fresca, folhas de manjericão e um fio de azeite. Simples e deliciosa, esta pizza é a perfeita representação da culinária italiana em sua forma mais pura.',
+        price: 49.9,
+        photo: 'https://api-ebac.vercel.app/efood/piazza//1.jpg',
+        serve: '1 a 2 pessoas',
+      },
+      {
+        id: 18,
+        name: 'Pizza Quatro Queijos',
+        description:
+          'A Pizza Quatro Queijos é uma combinação irresistível de muçarela, gorgonzola, parmesão e provolone, derretidos harmoniosamente sobre uma massa fina e crocante. Perfeita para os amantes de queijo que desejam uma experiência gastronômica rica e saborosa.',
+        price: 59.9,
+        photo: 'https://api-ebac.vercel.app/efood/piazza//2.webp',
+        serve: '1 a 2 pessoas',
+      },
+      {
+        id: 19,
+        name: 'Pizza Calabresa',
+        description:
+          'A Pizza Calabresa é uma opção saborosa e suculenta, feita com rodelas de calabresa, cebola roxa fatiada, azeitonas pretas e muçarela derretida. Assada em forno a lenha, esta pizza é a escolha perfeita para quem deseja saborear uma pizza tradicional e deliciosa.',
+        price: 64.9,
+        photo: 'https://api-ebac.vercel.app/efood/piazza//3.jpg',
+        serve: '1 a 2 pessoas',
+      },
+    ],
+  },
+  {
+    id: 6,
+    name: 'Jardim da Terra',
+    description:
+      'O Jardim da Terra é um restaurante vegano que se dedica a oferecer pratos deliciosos e criativos, utilizando apenas ingredientes frescos, orgânicos e sazonais. Nosso cardápio é cuidadosamente elaborado para proporcionar uma experiência culinária única, que celebra a diversidade e a riqueza dos alimentos à base de plantas.',
+    logo: 'https://api-ebac.vercel.app/efood/jardim_terra//capa.png',
+    coverImage: 'https://api-ebac.vercel.app/efood/jardim_terra//capa.png',
+    rating: 4.8,
+    featured: true,
+    tags: [{ id: 8, name: 'Vegano' }],
+    menu: [
+      {
+        id: 20,
+        name: 'Hambúrguer de Grão-de-Bico',
+        description:
+          'Nosso Hambúrguer de Grão-de-Bico é feito com grão-de-bico, cenoura, cebola e especiarias, servido em um pão vegano fresco com alface, tomate e nosso delicioso molho caseiro. Acompanha batatas rústicas assadas e uma salada fresca e colorida.',
+        price: 38.9,
+        photo: 'https://api-ebac.vercel.app/efood/jardim_terra//1.webp',
+        serve: '1 pessoa',
+      },
+      {
+        id: 21,
+        name: 'Lasanha de Berinjela',
+        description:
+          'A Lasanha de Berinjela é uma opção saborosa e reconfortante, preparada com camadas de berinjela grelhada, molho de tomate caseiro e um creme de castanha-de-caju. Assada até ficar dourada, esta lasanha vegana é a escolha perfeita para quem busca uma refeição saudável e deliciosa.',
+        price: 42.9,
+        photo: 'https://api-ebac.vercel.app/efood/jardim_terra//2.jpeg',
+        serve: '1 a 2 pessoas',
+      },
+      {
+        id: 22,
+        name: 'Bowl de Cogumelos e Quinoa',
+        description:
+          'O Bowl de Cogumelos e Quinoa é uma combinação nutritiva e saborosa de quinoa cozida, cogumelos salteados, espinafre, abacate e tomates-cereja. Servido com um molho de ervas frescas e limão, este prato é ideal para quem busca uma refeição leve e saudável.',
+        price: 35.9,
+        photo: 'https://api-ebac.vercel.app/efood/jardim_terra//3.jpg',
+        serve: '1 pessoa',
       },
     ],
   },

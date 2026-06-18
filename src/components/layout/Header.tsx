@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, ArrowLeft } from "lucide-react";
 import { useCart } from "../../hooks/useCart";
 import { Logo } from "../ui/Logo";
 import { Container } from "../ui/Container";
@@ -22,8 +22,9 @@ export function Header({ showCart = false }: Props) {
           {/* Link para voltar aos restaurantes */}
           <Link
             to="/"
-            className="text-sm font-bold text-primary transition-opacity hover:opacity-80"
+            className="flex items-center gap-1.5 text-sm font-bold text-primary transition-opacity hover:opacity-80"
           >
+            <ArrowLeft size={16} />
             Restaurantes
           </Link>
 

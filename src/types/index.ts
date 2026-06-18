@@ -19,6 +19,7 @@ export interface Restaurant {
   logo: string
   coverImage: string
   rating: number
+  featured?: boolean
   tags: Tag[]
   menu: Dish[]
 }
