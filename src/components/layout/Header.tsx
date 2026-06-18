@@ -55,17 +55,28 @@ export function Header({ showCart = false }: Props) {
 
   // Header principal (home)
   return (
-    <header className="bg-bg-peach py-10">
-      <Container className="flex flex-col items-center gap-10 text-center">
-        {/* Logo */}
-        <Logo size="lg" />
-
-        {/* Título principal */}
-        <h1 className="max-w-2xl text-4xl font-black leading-tight text-primary">
-          Viva experiências gastronômicas
-          <br />
-          no conforto da sua casa
-        </h1>
+    <header className="relative bg-bg-peach py-10">
+      <button
+        onClick={openCart}
+        className="absolute top-2.5 right-5 cursor-pointer transition-opacity hover:opacity-80"
+        aria-label={`Abrir carrinho com ${totalItems} item(ns)`}
+      >
+        <ShoppingCart size={24} className="text-primary" />
+        {totalItems > 0 && (
+          <span className="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full">
+            {totalItems}
+          </span>
+        )}
+      </button>
+      <Container>
+        <div className="flex flex-col items-center gap-10 text-center">
+          <Logo size="lg" />
+          <h1 className="max-w-2xl text-4xl font-black leading-tight text-primary">
+            Viva experiências gastronômicas
+            <br />
+            no conforto da sua casa
+          </h1>
+        </div>
       </Container>
     </header>
   );
