@@ -24,7 +24,7 @@ Aplicação web de delivery de comida desenvolvida como projeto do curso EBAC. P
 | React | 19 | Interface e componentização |
 | TypeScript | 6 | Tipagem estática |
 | Vite | 8 | Build e dev server |
-| Tailwind CSS | 4 | Estilização utilitária |
+| Styled Components | 6 | Estilização com CSS-in-JS |
 | React Router | 7 | Navegação entre páginas |
 | Lucide React | — | Ícones |
 
@@ -71,6 +71,9 @@ src/
 │   └── RestaurantProfile.tsx  # Página de perfil do restaurante
 ├── services/
 │   └── api.ts                 # Funções de fetch e mapeamento da API
+├── styles/
+│   ├── theme.ts               # Tema centralizado (cores, fontes, breakpoints)
+│   └── styled.d.ts            # Augmentation do DefaultTheme para TypeScript
 ├── types/
 │   └── index.ts               # Interfaces TypeScript globais
 └── data/
@@ -133,7 +136,7 @@ npm run preview
 
 ## Fluxo do Carrinho
 
-O estado global do carrinho é gerenciado via **React Context** (`CartContext`) e exposto pelo hook `useCart`. O fluxo de checkout segue as etapas:
+O estado global do carrinho é gerenciado via **React Context** (`CartContext`) e exposto pelo hook `useCart`. A estilização é feita com **Styled Components**, usando um tema centralizado em `src/styles/theme.ts` injetado pelo `ThemeProvider` no `App.tsx`. O fluxo de checkout segue as etapas:
 
 ```text
 Carrinho → Dados de Entrega → Pagamento → Confirmação
