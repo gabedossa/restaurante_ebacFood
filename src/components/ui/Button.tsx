@@ -1,3 +1,4 @@
+import styled, { css } from 'styled-components'
 import type { ButtonHTMLAttributes } from 'react'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -5,20 +6,55 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean
 }
 
-export function Button({ variant = 'primary', fullWidth, className = '', children, ...rest }: Props) {
-  const base = 'px-4 py-2 text-sm font-bold transition-colors cursor-pointer disabled:opacity-50 text-center rounded-none'
-  const variants = {
-    primary: 'bg-primary text-bg-peach border border-primary hover:bg-primary-dark hover:border-primary-dark',
-    secondary: 'bg-bg-peach text-primary border border-bg-peach hover:bg-bg-peach/90 hover:border-bg-peach/90',
-    outline: 'bg-transparent text-primary border border-primary hover:bg-primary hover:text-bg-peach',
-  }
-  return (
-    <button
-      className={`${base} ${variants[variant]} ${fullWidth ? 'w-full' : ''} ${className}`}
-      {...rest}
-    >
-      {children}
-    </button>
-  )
+const variants = {
+  primary: css`
+    background-color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.bgPeach};
+    border: 1px solid ${({ theme }) => theme.colors.primary};
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.primaryDark};
+      border-color: ${({ theme }) => theme.colors.primaryDark};
+    }
+  `,
+  secondary: css`
+    background-color: ${({ theme }) => theme.colors.bgPeach};
+    color: ${({ theme }) => theme.colors.primary};
+    border: 1px solid ${({ theme }) => theme.colors.bgPeach};
+    &:hover {
+      opacity: 0.9;
+    }
+  `,
+  outline: css`
+    background-color: transparent;
+    color: ${({ theme }) => theme.colors.primary};
+    border: 1px solid ${({ theme }) => theme.colors.primary};
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.bgPeach};
+    }
+  `,
 }
 
+const StyledButton = styled.button<{ $variant: 'primary' | 'secondary' | 'outline'; $fullWidth?: boolean }>`
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 0;
+  text-align: center;
+  display: inline-block;
+  width: ${({ $fullWidth }) => ($fullWidth ? '100%' : 'auto')};
+  &:disabled {
+    opacity: 0.5;
+  }
+  ${({ $variant }) => variants[$variant]}
+`
+
+export function Button({ variant = 'primary', fullWidth, children, ...rest }: Props) {
+  return (
+    <StyledButton $variant={variant} $fullWidth={fullWidth} {...rest}>
+      {children}
+    </StyledButton>
+  )
+}

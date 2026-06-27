@@ -1,22 +1,60 @@
+import styled from 'styled-components'
 import { useForm } from '../../hooks/useForm'
 import type { DeliveryInfo } from '../../types'
 import { useCart } from '../../hooks/useCart'
 import { Button } from '../ui/Button'
 
 const INITIAL: DeliveryInfo = {
-  receiver: '',
-  address: '',
-  city: '',
-  zipCode: '',
-  number: '',
-  complement: '',
+  receiver: '', address: '', city: '', zipCode: '', number: '', complement: '',
 }
+
+const FormTitle = styled.h2`
+  font-size: 16px;
+  font-weight: 900;
+  color: ${({ theme }) => theme.colors.bgPeach};
+  margin-bottom: 8px;
+`
+
+const FieldLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+`
+
+const FieldName = styled.span`
+  font-size: 12px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.bgPeach};
+`
+
+const Input = styled.input`
+  background-color: ${({ theme }) => theme.colors.bgPeach};
+  color: ${({ theme }) => theme.colors.primary};
+  font-weight: 700;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  &::placeholder { opacity: 0.5; }
+`
+
+const Row = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+`
+
+const Actions = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+`
 
 export function DeliveryForm() {
   const { setStep } = useCart()
   const { values, handleChange } = useForm<DeliveryInfo>(INITIAL)
-  const inputClass =
-    'rounded-none bg-bg-peach px-3 py-2 text-sm text-primary font-bold outline-none border-none placeholder-primary/50'
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -24,103 +62,49 @@ export function DeliveryForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-      <div className="mb-2">
-        <h2 className="text-bg-peach font-black text-base">Endereço de entrega</h2>
-      </div>
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      <FormTitle>Endereço de entrega</FormTitle>
 
-      <label className="flex flex-col gap-1.5">
-        <span className="text-bg-peach text-xs font-bold">Quem irá receber</span>
-        <input
-          name="receiver"
-          value={values.receiver}
-          onChange={handleChange}
-          required
-          className={inputClass}
-          placeholder="Nome do destinatário"
-        />
-      </label>
+      <FieldLabel>
+        <FieldName>Quem irá receber</FieldName>
+        <Input name="receiver" value={values.receiver} onChange={handleChange} required placeholder="Nome do destinatário" />
+      </FieldLabel>
 
-      <label className="flex flex-col gap-1.5">
-        <span className="text-bg-peach text-xs font-bold">Endereço</span>
-        <input
-          name="address"
-          value={values.address}
-          onChange={handleChange}
-          required
-          className={inputClass}
-          placeholder="Rua, Avenida, Logradouro"
-        />
-      </label>
+      <FieldLabel>
+        <FieldName>Endereço</FieldName>
+        <Input name="address" value={values.address} onChange={handleChange} required placeholder="Rua, Avenida, Logradouro" />
+      </FieldLabel>
 
-      <label className="flex flex-col gap-1.5">
-        <span className="text-bg-peach text-xs font-bold">Cidade</span>
-        <input
-          name="city"
-          value={values.city}
-          onChange={handleChange}
-          required
-          className={inputClass}
-          placeholder="Cidade"
-        />
-      </label>
+      <FieldLabel>
+        <FieldName>Cidade</FieldName>
+        <Input name="city" value={values.city} onChange={handleChange} required placeholder="Cidade" />
+      </FieldLabel>
 
-      <div className="grid grid-cols-2 gap-3">
-        <label className="flex flex-col gap-1.5">
-          <span className="text-bg-peach text-xs font-bold">CEP</span>
-          <input
-            name="zipCode"
-            value={values.zipCode}
-            onChange={handleChange}
-            required
-            className={inputClass}
-            placeholder="00000-000"
-          />
-        </label>
-        <label className="flex flex-col gap-1.5">
-          <span className="text-bg-peach text-xs font-bold">Número</span>
-          <input
-            name="number"
-            value={values.number}
-            onChange={handleChange}
-            required
-            className={inputClass}
-            placeholder="Nº"
-          />
-        </label>
-      </div>
+      <Row>
+        <FieldLabel>
+          <FieldName>CEP</FieldName>
+          <Input name="zipCode" value={values.zipCode} onChange={handleChange} required placeholder="00000-000" />
+        </FieldLabel>
+        <FieldLabel>
+          <FieldName>Número</FieldName>
+          <Input name="number" value={values.number} onChange={handleChange} required placeholder="Nº" />
+        </FieldLabel>
+      </Row>
 
-      <label className="flex flex-col gap-1.5">
-        <span className="text-bg-peach text-xs font-bold">Complemento (opcional)</span>
-        <input
-          name="complement"
-          value={values.complement}
-          onChange={handleChange}
-          className={inputClass}
-          placeholder="Apto, bloco, referência"
-        />
-      </label>
+      <FieldLabel>
+        <FieldName>Complemento (opcional)</FieldName>
+        <Input name="complement" value={values.complement} onChange={handleChange} placeholder="Apto, bloco, referência" />
+      </FieldLabel>
 
-      <div className="flex flex-col gap-2 mt-4">
-        <Button
-          type="submit"
-          variant="secondary"
-          fullWidth
-          className="py-2.5 text-xs"
-        >
+      <Actions>
+        <Button type="submit" variant="secondary" fullWidth style={{ padding: '10px', fontSize: '12px' }}>
           Continuar com o pagamento
         </Button>
-        <Button
-          type="button"
-          variant="secondary"
-          fullWidth
-          className="py-2.5 text-xs bg-bg-peach/80 text-primary border-none"
-          onClick={() => setStep('cart')}
-        >
+        <Button type="button" variant="secondary" fullWidth onClick={() => setStep('cart')}
+          style={{ padding: '10px', fontSize: '12px', backgroundColor: 'rgba(255,238,219,0.8)', border: 'none' }}>
           Voltar para o carrinho
         </Button>
-      </div>
+      </Actions>
     </form>
   )
 }
-

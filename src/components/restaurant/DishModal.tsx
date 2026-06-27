@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import styled from 'styled-components'
 import type { Dish } from '../../types'
 import { useCart } from '../../hooks/useCart'
 import { Button } from '../ui/Button'
@@ -7,6 +8,102 @@ interface Props {
   dish: Dish | null
   onClose: () => void
 }
+
+const Overlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 16px;
+`
+
+const ModalBox = styled.div`
+  position: relative;
+  background-color: ${({ theme }) => theme.colors.primary};
+  border-radius: 8px;
+  max-width: 672px;
+  width: 100%;
+  padding: 32px;
+  display: flex;
+  gap: 32px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
+`
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background-color 0.2s;
+  &:hover { background-color: rgba(255, 255, 255, 0.3); }
+`
+
+const DishImage = styled.img`
+  width: 100%;
+  height: 256px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+
+  @media (min-width: 640px) {
+    width: 320px;
+    height: 320px;
+  }
+`
+
+const ModalContent = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 24px;
+  color: ${({ theme }) => theme.colors.bgPeach};
+`
+
+const DishName = styled.h2`
+  font-size: 28px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.2;
+  margin-top: 15px;
+`
+
+const DishDescription = styled.p`
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  flex: 1;
+`
+
+const ServeInfo = styled.div`
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 16px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+`
+
+const AddButton = styled(Button)`
+  align-self: flex-end;
+`
 
 export function DishModal({ dish, onClose }: Props) {
   const { addItem, openCart } = useCart()
@@ -28,61 +125,19 @@ export function DishModal({ dish, onClose }: Props) {
   }
 
   return (
-    <div
-      className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
-      onClick={onClose}
-    >
-      <div
-  className="relative bg-primary rounded-lg max-w-2xl w-full p-6 sm:p-8 flex flex-col sm:flex-row gap-8 shadow-2xl mx-4 overflow-hidden"
-  onClick={(e) => e.stopPropagation()}
->
-  {/* Botão fechar */}
-  <button
-    onClick={onClose}
-    className="absolute right-4 top-4 z-10 flex items-center justify-center w-8 h-8 rounded-full bg-white/20 text-white hover:bg-white/30 transition-all cursor-pointer"
-    aria-label="Fechar"
-  >
-    ×
-  </button>
-
-  {/* Imagem */}
-  <img
-    src={dish.photo}
-    alt={dish.name}
-    className="w-full sm:w-80 h-64 sm:h-80 object-cover rounded-lg shrink-0"
-  />
-
-  {/* Conteúdo */}
-  <div className="flex flex-1 flex-col gap-6 text-bg-peach">
-    {/* Título */}
-    <div>
-      <h2 style={{marginTop:"15px"}} className="text-2xl sm:text-3xl font-black text-white leading-tight">
-        {dish.name}
-      </h2>
-    </div>
-
-    {/* Descrição */}
-    <p className="text-sm leading-relaxed text-white/90 flex-1">
-      {dish.description}
-    </p>
-
-    {/* Info adicional */}
-    <div className="flex flex-col gap-2 text-sm text-white/80 border-t border-white/20 pt-4">
-      <span className="font-semibold">Porção: {dish.serve}</span>
-    </div>
-
-    {/* Botão */}
-    <Button
-    style={{margin:"10px", padding:"5px"}}
-      variant="secondary"
-      className="self-end px-6 py-3 text-sm font-bold"
-      onClick={handleAdd}
-    >
-      Adicionar - R$ {dish.price.toFixed(2).replace('.', ',')}
-    </Button>
-  </div>
-</div>
-      </div>
-
+    <Overlay onClick={onClose}>
+      <ModalBox onClick={(e) => e.stopPropagation()}>
+        <CloseButton onClick={onClose} aria-label="Fechar">×</CloseButton>
+        <DishImage src={dish.photo} alt={dish.name} />
+        <ModalContent>
+          <DishName>{dish.name}</DishName>
+          <DishDescription>{dish.description}</DishDescription>
+          <ServeInfo>Porção: {dish.serve}</ServeInfo>
+          <AddButton variant="secondary" onClick={handleAdd} style={{ padding: '10px 24px', fontSize: '14px' }}>
+            Adicionar — R$ {dish.price.toFixed(2).replace('.', ',')}
+          </AddButton>
+        </ModalContent>
+      </ModalBox>
+    </Overlay>
   )
 }

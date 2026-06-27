@@ -1,34 +1,58 @@
+import styled from 'styled-components'
 import { Header } from '../components/layout/Header'
 import { Footer } from '../components/layout/Footer'
 import { RestaurantCard } from '../components/home/RestaurantCard'
+import { Container } from '../components/ui/Container'
 import { useRestaurants } from '../hooks/useRestaurants'
+
+const Main = styled.main`
+  flex: 1;
+  background-color: ${({ theme }) => theme.colors.bgLight};
+  padding: 40px 0;
+`
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin: 15px 20px;
+
+  @media (min-width: 640px) {
+    grid-template-columns: 1fr 1fr;
+  }
+`
+
+const StatusMessage = styled.p<{ $error?: boolean }>`
+  text-align: center;
+  color: ${({ theme, $error }) => ($error ? '#ef4444' : theme.colors.primary)};
+`
+
+const PageWrapper = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`
 
 export function Home() {
   const { data: restaurants, loading, error } = useRestaurants()
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <PageWrapper>
       <Header />
-
-      <main className="flex-1 bg-bg-light py-10 md:py-14">
-        <div style={{ margin: '15px 20px' }}>
-          {loading && (
-            <p className="text-center text-primary">Carregando restaurantes...</p>
-          )}
-          {error && (
-            <p className="text-center text-red-500">{error}</p>
-          )}
+      <Main>
+        <Container>
+          {loading && <StatusMessage>Carregando restaurantes...</StatusMessage>}
+          {error && <StatusMessage $error>{error}</StatusMessage>}
           {!loading && !error && (
-            <div className="mx-auto w-full grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-2">
+            <Grid>
               {restaurants.map((restaurant) => (
                 <RestaurantCard key={restaurant.id} restaurant={restaurant} />
               ))}
-            </div>
+            </Grid>
           )}
-        </div>
-      </main>
-
+        </Container>
+      </Main>
       <Footer />
-    </div>
+    </PageWrapper>
   )
 }

@@ -1,6 +1,81 @@
+import styled from 'styled-components'
 import { useCart } from '../../hooks/useCart'
 import { CartItem } from './CartItem'
 import { Button } from '../ui/Button'
+
+const Overlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 40;
+`
+
+const Sidebar = styled.aside`
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  max-width: 360px;
+  background-color: ${({ theme }) => theme.colors.primary};
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  padding-top: 40px;
+`
+
+const CartHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+`
+
+const CartTitle = styled.h2`
+  font-size: 20px;
+  font-weight: 900;
+  color: ${({ theme }) => theme.colors.bgPeach};
+`
+
+const CloseButton = styled.button`
+  background: none;
+  border: none;
+  color: ${({ theme }) => theme.colors.bgPeach};
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  &:hover { opacity: 0.85; }
+`
+
+const ItemsList = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 16px;
+`
+
+const EmptyMessage = styled.p`
+  padding: 16px;
+  color: ${({ theme }) => theme.colors.bgPeach};
+  font-size: 14px;
+  text-align: center;
+`
+
+const CartFooter = styled.div`
+  padding-top: 16px;
+  border-top: 1px solid rgba(208, 91, 91, 0.3);
+`
+
+const TotalRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  color: ${({ theme }) => theme.colors.bgPeach};
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 16px;
+`
 
 export function Cart() {
   const { items, isOpen, closeCart, totalPrice, setStep } = useCart()
@@ -9,54 +84,37 @@ export function Cart() {
 
   return (
     <>
-      <div
-        className="fixed inset-0 bg-black/80 z-40"
-        onClick={closeCart}
-      />
+      <Overlay onClick={closeCart} />
+      <Sidebar>
+        <CartHeader>
+          <CartTitle>Carrinho</CartTitle>
+          <CloseButton onClick={closeCart}>Fechar</CloseButton>
+        </CartHeader>
 
-      <aside className="fixed top-0 right-0 h-full w-full max-w-[360px] bg-primary z-50 flex flex-col shadow-2xl p-4 pt-10">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-black text-bg-peach">Carrinho</h2>
-          <button
-            onClick={closeCart}
-            className="text-bg-peach text-sm font-bold hover:opacity-85 transition-opacity cursor-pointer"
-          >
-            Fechar
-          </button>
-        </div>
-
-        <div className="flex-1 overflow-y-auto mb-4">
+        <ItemsList>
           {items.length === 0 ? (
-            <p className="p-4 text-bg-peach text-sm text-center">
-              O carrinho está vazio. Adicione itens para continuar.
-            </p>
+            <EmptyMessage>O carrinho está vazio. Adicione itens para continuar.</EmptyMessage>
           ) : (
-            <div className="flex flex-col gap-3">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {items.map((item) => (
                 <CartItem key={item.dish.id} item={item} />
               ))}
             </div>
           )}
-        </div>
+        </ItemsList>
 
         {items.length > 0 && (
-          <div className="pt-4 border-t border-primary-dark/30">
-            <div className="flex justify-between text-bg-peach font-bold mb-4 text-sm">
+          <CartFooter>
+            <TotalRow>
               <span>Valor total</span>
               <span>R$ {totalPrice.toFixed(2).replace('.', ',')}</span>
-            </div>
-            <Button
-              variant="secondary"
-              fullWidth
-              className="py-2.5 text-xs font-bold"
-              onClick={() => setStep('delivery')}
-            >
+            </TotalRow>
+            <Button variant="secondary" fullWidth onClick={() => setStep('delivery')} style={{ padding: '10px', fontSize: '12px' }}>
               Continuar com a entrega
             </Button>
-          </div>
+          </CartFooter>
         )}
-      </aside>
+      </Sidebar>
     </>
   )
 }
-

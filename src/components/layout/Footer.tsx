@@ -1,6 +1,46 @@
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 import { Logo } from '../ui/Logo'
 import { Container } from '../ui/Container'
+
+const FooterWrapper = styled.footer`
+  background-color: ${({ theme }) => theme.colors.bgPeach};
+  padding: 40px 0;
+`
+
+const FooterContainer = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+`
+
+const SocialLinks = styled.div`
+  display: flex;
+  gap: 8px;
+`
+
+const SocialIcon = styled.a`
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.bgPeach};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+  &:hover { opacity: 0.8; }
+`
+
+const FooterText = styled.p`
+  font-size: 10px;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.primary};
+  opacity: 0.7;
+  line-height: 1.6;
+  max-width: 340px;
+`
 
 const socialLinks = [
   {
@@ -34,30 +74,21 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-bg-peach py-10">
-      <Container className="flex flex-col items-center gap-6">
-        <Link to="/">
-          <Logo size="md" />
-        </Link>
-
-        <div className="flex gap-2">
+    <FooterWrapper>
+      <FooterContainer>
+        <Link to="/"><Logo size="md" /></Link>
+        <SocialLinks>
           {socialLinks.map(({ label, href, icon }) => (
-            <a
-              key={label}
-              href={href}
-              aria-label={label}
-              className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-bg-peach hover:opacity-80 transition-opacity"
-            >
+            <SocialIcon key={label} href={href} aria-label={label}>
               {icon}
-            </a>
+            </SocialIcon>
           ))}
-        </div>
-
-        <p className="text-[10px] text-center text-primary/70 leading-relaxed max-w-sm">
+        </SocialLinks>
+        <FooterText>
           A efood é uma plataforma para divulgação de estabelecimentos, a responsabilidade pelo
           consumo e entregas é toda do estabelecimento contratado.
-        </p>
-      </Container>
-    </footer>
+        </FooterText>
+      </FooterContainer>
+    </FooterWrapper>
   )
 }

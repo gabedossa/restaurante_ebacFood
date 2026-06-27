@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 import type { Dish } from '../types'
 import { Header } from '../components/layout/Header'
 import { RestaurantHero } from '../components/restaurant/RestaurantHero'
@@ -9,6 +10,56 @@ import { DishModal } from '../components/restaurant/DishModal'
 import { Container } from '../components/ui/Container'
 import { useRestaurant } from '../hooks/useRestaurant'
 
+const PageWrapper = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`
+
+const Main = styled.main`
+  flex: 1;
+  background-color: ${({ theme }) => theme.colors.bgLight};
+  padding: 32px 0;
+`
+
+const DishGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin: 15px 20px;
+
+  @media (min-width: 640px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+`
+
+const CenterMessage = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background-color: ${({ theme }) => theme.colors.bgLight};
+`
+
+const ErrorText = styled.p<{ $error?: boolean }>`
+  color: ${({ $error }) => ($error ? '#ef4444' : 'inherit')};
+`
+
+const BackLink = styled.button`
+  background: none;
+  border: none;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  color: ${({ theme }) => theme.colors.primary};
+`
+
 export function RestaurantProfile() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
@@ -17,47 +68,40 @@ export function RestaurantProfile() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <PageWrapper>
         <Header showCart={true} />
-        <div className="flex-1 bg-bg-light flex items-center justify-center">
-          <p className="text-primary">Carregando...</p>
-        </div>
+        <CenterMessage>
+          <ErrorText>Carregando...</ErrorText>
+        </CenterMessage>
         <Footer />
-      </div>
+      </PageWrapper>
     )
   }
 
   if (error || !restaurant) {
     return (
-      <div className="min-h-screen bg-bg-light flex flex-col items-center justify-center gap-4 px-4">
-        <p className="text-red-500">{error ?? 'Restaurante não encontrado.'}</p>
-        <button onClick={() => navigate('/')} className="font-semibold text-primary underline">
-          Voltar
-        </button>
-      </div>
+      <CenterMessage>
+        <ErrorText $error>{error ?? 'Restaurante não encontrado.'}</ErrorText>
+        <BackLink onClick={() => navigate('/')}>Voltar</BackLink>
+      </CenterMessage>
     )
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <PageWrapper>
       <Header showCart={true} />
       <RestaurantHero restaurant={restaurant} />
-
-      <div style={{ margin: '15px 20px' }}>
-        <main className="flex-1 bg-bg-light py-8 sm:py-12">
-          <Container>
-            <div className="mx-auto w-full grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {restaurant.menu.map((dish) => (
-                <DishCard key={dish.id} dish={dish} onSelect={setSelectedDish} />
-              ))}
-            </div>
-          </Container>
-        </main>
-      </div>
-
+      <Main>
+        <Container>
+          <DishGrid>
+            {restaurant.menu.map((dish) => (
+              <DishCard key={dish.id} dish={dish} onSelect={setSelectedDish} />
+            ))}
+          </DishGrid>
+        </Container>
+      </Main>
       <Footer />
-
       <DishModal dish={selectedDish} onClose={() => setSelectedDish(null)} />
-    </div>
+    </PageWrapper>
   )
 }
